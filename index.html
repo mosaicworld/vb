@@ -1,0 +1,239 @@
+<!-- vb30c.html -->
+
+
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<html lang="en">
+
+	<head>
+		<title>TEAM BVB</title> <!-- there could be a better name but Verminator didn't sound too good; also VB Enforcer -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href='http://fonts.googleapis.com/css?family=Nunito:300,400|Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+	    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<!-- Custom styles for this nav footer -->
+    	<link href="css/sticky-footer-navbar.css" rel="stylesheet">
+    	<link href="css/main.css" rel="stylesheet">
+<!--	    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+		<script type="text/javascript" src="js/jquery-1.10.2.min.js" ></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+    	<script src="js/bootstrap.min.js"></script>
+<!-- Optionally enable responsive features in IE8 -->
+    	<!--<script src="js/respond.js"></script> -->
+    	<script src="js/vb_main.js"></script>
+
+		<script type="application/javascript" language="JavaScript">
+
+
+
+
+		</script>
+
+	</head>
+
+	<body>
+		<div id="wrap"> <!-- wraps navbar and content -->
+
+			<div class="navbar navbar-fixed-top"> <!-- navbar-inverse  -->
+		      <div class="container">
+		        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+		          <span class="icon-bar"></span>
+		          <span class="icon-bar"></span>
+		          <span class="icon-bar"></span>
+		        </button>
+		        <a class="navbar-brand logo" href="#">TEAM BVB</a>
+	<!--	        <div class="nav-collapse collapse">
+		          <ul class="nav navbar-nav">
+		            <li class="active"><a href="#">Home</a></li>
+		            <li><a href="#about">About</a></li>
+		            <li><a href="#contact">Contact</a></li>
+		          </ul>
+		        </div>
+		    --><!--/.nav-collapse -->
+		      </div>
+		    </div>
+
+		    <!-- page content begins; container has padding-top -->
+		    <div class="container">
+				<form action="" id="vballTeams">
+					<div class="row">
+		  				<div class="col-12 col-lg-12">
+		  					<!-- may want to take in number of doubles players rather than teams for consistency -->
+							<label for="NumDoublesPlayers">How many doubles players are there?</label>
+							<select class="label" name="NumDoublesPlayers" id="NumDoublesPlayers">
+							  <option value="0" selected>0</option> 
+							  <option value="4">4</option> 
+							  <option value="8">8</option>
+							  <option value="12">12</option>
+							  <option value="16">16</option> 
+							</select>
+		  				</div>
+					</div>
+
+					<br/>
+					
+					<div class="row">
+		  				<div class="col-12 col-lg-12">
+							<label for="NumGroupPlayers">How many group players are there?</label>
+							<select class="label" name="NumGroupPlayers" id="NumGroupPlayers">
+							  <option value="5" selected >5</option>
+							  <option value="6">6</option>
+							  <option value="7">7</option> 
+							  <option value="8">8</option>
+							  <option value="9">9</option>
+							  <option value="10">10</option> 
+							  <option value="11">11</option>
+							  <option value="12">12</option>
+							  <option value="13">13</option>
+							  <option value="14">14</option>
+							  <option value="15">15</option> 
+							  <option value="16">16</option>
+							  <option value="17">17</option>
+							  <option value="18">18</option> 
+							  <option value="19">19</option>
+							  <option value="20">20</option>
+							  <option value="21">21</option> 
+							  <option value="22">22</option>
+							  <option value="23">23</option>
+							  <option value="24">24</option> 
+							  <option value="25">25</option>
+							</select>
+		  				</div>
+					</div>
+
+					<br/>
+
+					<div class="row">
+		  				<div class="col-12 col-lg-12">
+							<input name="btnNumSizeCourt" id="btnNumSizeCourt" type="button" value="Get number of courts" class="label"></input> <!-- hid (including team sizes) -->
+		  				</div>
+					</div>
+
+					<br/>
+
+					<div class="row">
+					  	<div class="col-12 col-lg-12">
+					  		<input name="btnRandomGroup" id="btnRandomGroup" type="button" value="Randomize Teams" class="label" ></input>
+					  		<!-- hid (including doubles) -->
+					  	</div>
+					</div>
+
+					<br/>
+
+				</form>
+
+				<div class="row">
+					<div class="col-12 col-lg-12">
+						<ul id="court_results" class="results">
+							<!--<li><h4>Court Results<h4></li>-->
+						</ul>
+					</div>
+				</div>
+
+				<div id="div_team_results" class="row">
+				    <canvas id="myCanvas" width="480" height="800"></canvas> 
+
+					<script type="text/javascript">
+						var canvas = document.getElementById('myCanvas');
+					
+						function displayTeamResults () { //called from vb_main.js randomGroupTeams() function
+							//iterate through listCourts, draw one rectangle per court
+
+							for (var i = 0; i < listCourts.length; i++) {
+								var context = canvas.getContext('2d');
+								context.beginPath();
+								context.rect((win_width/2 - rect_width/2), (i * (rect_height + 50) + 5), rect_width, rect_height);
+								//context.fillStyle = 'orange';
+								//context.fill();
+								context.lineWidth = 1.5;
+								if (listCourts[i].size == 4) { // court for 4 player teams
+									context.strokeStyle = '#006666';
+								} else if (listCourts[i].size == 3) { // court for 3 player teams
+									context.strokeStyle = '#66CC99';
+								} else { //court for 2 player teams
+									context.strokeStyle = '#CC9900';
+								}
+								context.stroke();
+								context.font = 'normal 1em Arial';
+								context.fillStyle = 'black';
+								context.textAlign = 'center';
+      							context.fillText(listCourts[i].team1.players, (win_width/2), (i * (rect_height + 50) + 55));
+      							console.log("court " + (i + 1) + " team1 players: " + listCourts[i].team1.players);
+      							context.fillText('vs', (win_width/2), (i * (rect_height + 50) + 80));
+      							context.fillText(listCourts[i].team2.players, (win_width/2), (i * (rect_height + 50) + 105));
+							}
+
+							if (ExtraPlayer > 0) {
+								context.fillText('Extra players to add to teams: '+arrRandomPlayers.splice((arrRandomPlayers.length - ExtraPlayer), ExtraPlayer), (win_width/2), (listCourts.length) * (rect_height + 50));
+							}
+						} //end displayTeamResults()
+
+				    </script>
+				</div> <!-- #div_team_results -->
+
+				<!-- 3 col on desktop but collapse to 2 col on mobile devices -->
+<!--
+				<div class="row">
+					<div class="col-12 col-sm-6 col-lg-4">
+						<ul id="team_results" class="results">
+							<li>Court 1 Teams</li>
+						</ul>			
+					</div>
+					<div class="col-12 col-sm-6 col-lg-4">
+						<ul id="team_results2" class="results">
+							<li>Court 2 Teams</li>
+						</ul>			
+					</div>
+					<div class="col-12 col-sm-6 col-lg-4">
+						<ul id="team_results3" class="results">
+							<li>Court 3 Teams</li>
+						</ul>			
+					</div>
+					<div class="col-12 col-sm-6 col-lg-4">
+						<ul id="team_results4" class="results">
+							<li>Court 4 Teams</li>
+						</ul>			
+					</div>
+					<div class="col-12 col-sm-6 col-lg-4">
+						<ul id="team_results" class="results">
+							<li>Court 5 Teams</li>
+						</ul>			
+					</div>
+					<div class="col-12 col-sm-6 col-lg-4">
+						<ul id="team_results2" class="results">
+							<li>Court 6 Teams</li>
+						</ul>			
+					</div>
+				</div> -->
+				<!-- ./row -->
+
+				<!-- 3 col on desktop but collapse to 2 col on mobile devices -->
+<!--
+				<div class="row">
+					<div class="col-12 col-sm-6 col-lg-4">
+						<ul id="team_results3" class="results">
+							<li>Court 7 Teams</li>
+						</ul>			
+					</div>
+					<div class="col-12 col-sm-6 col-lg-4">
+						<ul id="team_results4" class="results">
+							<li>Court 8 Teams</li>
+						</ul>			
+					</div>
+				</div> --><!-- ./row -->
+
+
+
+			</div> <!-- ./container -->
+		</div> <!-- #wrap -->
+
+<!--
+		<div id="footer">
+	      <div class="container">
+	        <p class="text-muted credit"></p> -->
+
+	        <!-- Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>. -->
+<!--	      </div>
+	    </div> --> <!-- #footer -->
+	</body>
+
+</html>		

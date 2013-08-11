@@ -1,0 +1,386 @@
+vb_app_notes.txt
+
+last updated 080613
+===
+
+major branches occur
+
+> /Users/carolchung/Documents/working/2013/phonegap/072513/vb17c19.html
+	in the comments at top, kept most of the history of the app dev history
+	also it's probably the most comprehensive listing of bugs (fixed and open)
+	also it's probably the most comprehensive list of enhancements (mostly pending)
+
+> /Users/carolchung/Documents/working/2013/phonegap/072513/vb27g2.html
+	this version and maybe several preceding, were experiments in dynamics visuals
+	wanted to iterate through a for loop for a dynamic # of rectangles symbolizing vball courts
+	will probably do a workaround
+
+> /Users/carolchung/Documents/working/2013/phonegap/072513/vb28.html
+file:///Users/carolchung/Documents/working/2013/phonegap/072513/vb28b.html
+	this is the latest branch
+	know that I can draw rect's on the fly (on page load)
+	know that I can print the final court assignments with randomized players dynamically
+	X->just pre-draw about 6 empty rect's
+	>update the page with the court/player assignments text on top of the rect's
+		not sure if this possible using canvas 2d
+		but in the latest source, the court player assignments are being printed to console (rather than user gui)
+	>downside (initially there will be empty rect's; and even after player assign, there will be some empty rect's)
+	>may want to test out whether kineticJS is more useful to what I want to accomplish
+
+> https://www.dropbox.com/s/cz9msm3vrs3xla8/vb30.html
+  https://www.dropbox.com/s/odvojqti606m5j0/vb_main.js
+
+---
+beta2 release candidate
+vb30.html with js/vb_main.js
+	desc: moved most custom js into ext file but kept the canvas portion for displaying the courts and displaying the assigned team results in a <script> within the <body>; conditionalized it within a custom function (called in resp to button click in the custom ext js file)
+
+beta release candidate
+index.html => vb29.html
+
+>>last 081013, 1:30am, tried to upload latest index.html to personal website but internet connex went down
+>>tested 081013, 1:17am
+	1 on android phone, the input fields are too large; text wrapping to a 2nd line
+	2 the canvas size is too wide; probably would like to assign canvas width/height dynamically according to the device if possible
+
+---
+
+visual design/usability analysis
+
+>vb30.html (081013)
+	(no order of priority)
+	X-on android, the app logo doesn't show up strong enough (either heavier font or larger or darker or change out font)
+		main.css > increased font size
+		darkened font color
+	0-big thing is the canvas size: would like to test whether it can be variable to the initial window dimensions?
+		http://www.html5rocks.com/en/tutorials/casestudies/gopherwoord-studios-resizing-html5-games/
+
+	-nav bar: replace the lines icons (no links) but like to add a reset button; possibly link to a comments form or at least a bug tracking form?
+	-form: not crazy about the line spacing (inconsistent) but think it has to do with the responsive design (where it breaks vs just line wraps)
+	X-form: don't like the contrast background for the select list labels (prefer for it to just be black on white text (no background)
+		fixed vb30b.html
+		removed class="label" from <label>
+	-buttons: somewhere should add a reset button (basically should refresh the page or clear everything/form and results)
+	-general: not crazy about the left alignment (definitely take out the indent on the list <li> elements); but even from the beg of form, not left aligned with the app logo, not to crazy about that
+	-team display: it is working as expected and design but feel like it is taking too much space and scrolling to display too little information
+		>play around (sketching) with dif ways to display the info in a visually interesting way but a little bit more concisely (at least 3 courts per row)
+		X-vb30c.html > changed the court (no fill, just diff color outline rect)
+		0-would like to fix so that 3 courts display per row
+
+---
+
+functional review
+
+>vb30c.html (081113)
+	-maybe the court selections (whether 4's, 3's, or 2's) should be more recursive?
+	-one form of logic could be
+		switch between selecting 3's and 4's courts (recursively) until remaining count is less than 
+
+---
+
+old header notes vb18.html
+
+<!-- NOTES diff vb18.html from vb17c19.html
+
+	1 moved internal styles out to css/main.css
+	2 worked on assignTeams() => vb18.html
+	  assigning to teams of 4 players
+	3 assignTeams() => vb19.html
+	  worked on assigning to teams of 3 players
+	4 assignTeams() => vb20.html
+	  worked on assigning to teams of 2 players
+
+>>>080513 need to work on the Court instantiation; guess all the court visualization detail comes from
+	  a) court number; b) court teams; c) court size (this comes from teams info)
+	  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects
+
+	1 added global var listTeams (track which teams added to which court)
+	X-looks ok; tested a little in chrome
+
+>>>080613
+	2 check for loop logic in assignTeams()
+	  have increments like i + 4, i + 3, i + 2; not sure if they would also cause infinite loops; except splicing the arrays make them constantly shrinking so I don't run in the the issue
+
+	3 check that there is a minimum # of global vars (try to correct where possible using param's)
+
+	also see remaining todo's from vb17c19.html
+
+	2 main remaining issues
+	  how to handle a nice visual display of results
+	  /Users/carolchung/Documents/working/2013/phonegap/072513/canvas3.html
+	    >>above is a good example of how I'd like to approach layout of the courts
+
+	  http://www.html5canvastutorials.com/tutorials/html5-canvas-rectangles/
+	  http://api.jquery.com/width/
+	  http://api.jquery.com/height/
+
+	3 issue where displayTeamResults appears to get called at the very beginning of the page display; want it to wait as event handler to button click for random teams
+	   need to research examples for interactivity with canvas contexts
+	   ex. http://www.html5canvastutorials.com/advanced/html5-clear-canvas/
+	   most of my js logic is in header but I think the canvas logic needs to be in script within the body
+	   so can I have a function from the header calling a function in the body?
+	>>>(vb27g.html) => tried to move as much of the displayTeamResults function out into the body script but there is still a dependency between the global var, listCourts; I think I need to use javascript that can be fully located in the header b/c of dependencies on the other header functions
+
+	>>>(vb27g2.html) => the only way I got the canvas object to draw is if the rectangle is drawn statically, it is drawn on window load, rather than as a response to button click
+
+	>>>080613, 11:30pm - what if I tried to move all the header script down to the body?? would that resolve anything?
+	   >>vb29.html, functionality works but the source just looks very messy
+	   would I be able to draw multiple rectangles dynamically?
+	   1 want to get input from user
+	   2 want to perform calc on the input
+	   3 based on results of calc, want to output a var # of rectangles in the gui
+
+	   alt, if I can't figure it out w/ canvas 2d context, also checkout KineticJS
+	   http://www.html5canvastutorials.com/kineticjs/html5-canvas-kineticjs-rect-tutorial/
+	   http://www.html5canvastutorials.com/kineticjs/html5-canvas-kineticjs-text-tutorial/
+	   (even if I don't want to animate anything, it might be better b/c seems to support layers and I want to have some text over graphics)
+
+>>>080913: vb30.html, vb_main.js
+	-what if I moved all of the custom js functionality into an external js file; but kept only the displayTeam function in the html (to insert context in right place)
+
+	3 todo
+	  how to handle the assignment of odd #s of people (extra players)
+	  how to avoid doing the calculation of teams/courts players 2x (right now doing it one time just to get extra players; then doing it another time in the assignment of players to teams and teams to courts)
+
+	4 remaining tech issues
+	  *not crazy about the randomization method
+
+	5 tech issues
+	  group players 20; get a 4s; one 3's; one 2's; 2 extras => better if calculates one 4's and two 3's (even players)
+	  prefer if can get back different possible combo's of teams (dif combos of all 4's; mixed 4's/3's; mixed 4's/3's/2's)
+
+	>>>
+	Issues
+
+	A When fixed doubles 0; group players 20 => expect a team of 4's and 2 teams of 3's but get one team 4's; one team 3's; one team 2's and 2 extra players
+
+	B Issue vb22.html (fixed vb22d.html)
+	assignCourts(); issue in the first for loop where it just keeps iterating forever
+	keeps adding same 2 teams to additional courts to inifinity
+	>resolved by changing the way the for loop counter was incremented (in the for statement kept j++ but within body of for loop manually incremented j += 1)
+
+-->
+
+
+---
+
+old header notes vb17c19.html
+
+<!--
+	Test cases:
+
+	1. 4 doubles players (1 doubles court): works ok for total 9 players through total 25 players
+	   but above 25 players, need to start looping through the if conditions otherwise will have 4 or more extra players
+	   which could be another 2s court at least
+
+	2. (vb12.html)
+	   bug 4 doubles players: 28 players
+	   get -4 for extra players
+	   (similar issues for 29 and 30 players; 1 initial doubles court)
+	X-fixed (vb12b.html)
+	   only restested for bug situations but not regression for old working combos with 4 doubles players
+
+	3. (vb12.html)
+	   bug 8 doubles players: starting with 14 players
+	   should be 2 teams doubles and 1 team 3's; but get 3 teams doubles and 1 team 3's
+	   then get -4 for extra players
+	X-fixed (vb12b.html)
+		tested from 14 players and higher (2 teams doubles); the negative extra player count does not occur
+		did not do regression testing for old working combos w/ 8 doubles players
+
+	4. (vb12b.html)
+		not sure if this is usability issue; this is correct according to the code logic
+		players = 30; doubles players = 8
+		get 4 doubles courts; one 4's court; one 3's court => seems weirdly tilted towards doubles
+
+	5. (vb13.html)
+		test for 12 doubles players (for players from 12 - 30)
+	X-generally works as expected
+	
+	6. (vb13.html)
+		test for 16 doubles players (players from 16 -30)
+	X-generally works as expected
+	
+	7. (vb13c.html)
+		also think I should fix how I'm dealing with odd number of players; not sure that I need to do the count at the very beginning; it could probably all be counted at the end if remaining group players >0 and <=3 ...
+		removed old if condition for checking odd on initial NumPlayers value (it will get caught at the end w/ ExtraPlayer value anyhow)
+	X-tested all the way through for 4 doubles players (9 - 30 players); but didn't test extensively for remaining doubles players counts (6, 8, 12)
+
+	8.  add the feature to randomly assign players to teams
+		http://javascript.about.com/library/blsort4.htm
+	0-implemented but something about the random number generation seems buggy
+
+	9. (vb14e.html local)
+		able to move vars outside of the function (declare outside and initialize values within function)
+		NumPlayers, NumDoublesPlayers, NumGroupPlayers, Num2Courts, Num3Courts, Num4Courts
+	X-ok
+
+	10. (vb16c.html local)
+		issue
+	    something wrong with randomizer where sometimes there is a blank item in the arrRandomPlayers, not sure why this happens? 
+	X-fixed in the randomizeArray(array1) function but it could be better
+		don't have the issue where the randomized list is empty now but don't think the list is really as random as I'd like (players are usually only 2 away from each other at most on a team)
+
+	11. (vb16d.html local)
+		mostly doing what's expected but need to resolve 10 to move forward
+	X-currently tracking the number of extra players (1-3 extra players) OK
+	0-need to figure out how to report the player numbers
+	0-not sure if they should automatically be added to the smallest teams or mid sized teams
+
+	12. (vb17.html local)
+		changed the input logic
+		first input, is number of fixed doubles players
+		2nd input, is number of remaining players (assume group)
+		negates need for old NumPlayers var (reduces one calculation)
+	X-tested a little but not extensively
+
+	13. (vb17b.html local)
+		hide messages that are not relevant (ex when Num4Courts == 0, don't need info about count or random players assign)
+	X-tested a little; not extensively
+
+	14. (vb17c8.html)
+		revised the grid sys via bootstrap 3
+	X-tested a little in chrome; not extensively
+
+>>080113
+
+	15. (vb17c12.html)
+		updated the nav, content, and footer div styling per
+		http://examples.getbootstrap.com/sticky-footer-navbar/index.html
+	X-tested a little in chrome
+
+>>080213
+
+	16. (vb17c13.html, vb17c15.html)
+		need to fix the issue where doubles player id's are getting messed up
+		currently adding the count for fixed doubles teams to random doubles teams (when click random players for group and there's a remainder of 4 players); this is messing up the final doubles (random team) player number
+		>resolution
+		default doubles players = 0; assume people are going to select their own doubles teams
+		remove one randomization button; change value: Randomize Teams
+		need the internal logic to do one of two flows
+		>>1 if doubles players 0, then just randomize group players count
+		>>2 if doubles players > 0, then need to perform randomization on 2 lists
+			list 1: for doubles players
+			list 2: for group players (should start the count at number of doubles players + 1; to have unique numbers across all doubles and group players)
+		>just started to change the randomization functions to account for this; haven't worked yet on the court/team players assigned display
+
+	17. (vb17c16.html)
+		issue: 0 doubles players; 7 group players
+		extra player: gives an unexpected number (2nd to last array element rather than last array element)
+	X-fixed; issue with calling splice on same array 2 times
+
+	18. (vb17c17.html)
+		issue: in the group players array (non randomized, it looked like values generated by string concatenation rather than mathmatical addition; https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)
+	X-fixed
+
+>>080313
+
+	19. (vb17c18.html)
+		issue: still have confusing situtation where sometimes the 2s players will get populated from 2 different arrays
+		?which do I pull from first?
+		?how do I combine elements of 2 arrays into one output?
+		>current resolution 
+		1 track known doubles players in a separate array
+		2 randomize list of known doubles players
+		3 track group players in another array
+		4 randomize list of group players
+		5 assign group players to teams: 4's, 3's, 2's
+		6 add random known doubles players to the array for 2s teams
+	X-fixed; tested a little in chrome
+
+	20. (vb17c18.html)
+		separated the display from the randomized player to team assignment
+		added displayTeamResults() function
+	X-fixed; tested a little chrome
+
+	21. (vb17c19.html)
+		addressed issue where the final randomized players (2s) array was getting populated wrong (after group 2s, blank values were added and before fixed 2s, one blank value was added)
+		issue was with the count of 2s courts (same value was added multiple times b/c I was using only one var originally to count 2s courts across fixed and group players)
+		created 3 vars: var Num2CourtsFixed, Num2CourtsGroup, TotNum2Courts
+	X-fixed; tested a little chrome
+
+	22. (vb17c14.html)
+		tweaked the grid so that desktop; widest is 3 col wide
+		tablet: widest is 2 col wide
+		phone: widest is single col
+		X-tested in chrome
+
+>>080413
+
+	23. (vb17c20.html)
+		should update the display for 4s and 3s courts so they're using for loops (like the implementation currently for 2s court display)
+		it's still a temp fix; need to do it later so it splits into appropriate teams; but at least want to know that all players are being divied up into teams (no orphans or weird values)
+
+	24. rewrite js so that it is object oriented
+		-court object
+		-team object
+
+	25. reduce use of global vars
+		try to write functions so that parameters are passed rather than global vars used
+
+	24. archive source into git (not sure where to put, on cchung vs mosaic_world github)
+
+	24. (vb17c10.html)
+		would like to clean up the way the teams are being displayed
+		would like a visual representation of the court
+		would like to write out the player numbers on either side of the court
+		created visual prototype/comp but didn't implement code
+
+	25. (vb17c.html local)
+		try a different method of list randomization
+		https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+		try getRandomArbitrary
+		maybe 1/3 of time, try to move a number into the middle of the list (as opposed to currently only adding it to the beginning or end)
+
+	26. (vb17c.html local)
+		track separately, the number of fixed doubles players vs the number of random doubles players
+		**need to decide, when you choose to randomize all teams, how do you designate beforehand which numbers will be the doubles players vs which numbers will be the group players?
+			maybe you need to create a list of 1-4 for doubles; and list of 1-5 for group?
+
+	27. decide where to place extra people
+
+	28. *also need to figure out how to interate through lists to display who is on which team per court
+		display results visually
+
+	29. marketing
+		branding (look and feel)
+		colors
+		fonts
+		layout
+
+	30. TODO
+		
+		-would like to enhance the logic so you can get other combinations; for ex. limit to one 4's court and make the rest 3's and 2's
+			-also I would like to come up with all possible permutations
+		-would like to have a better 
+		-would like to automate the test
+		*-make a nicer GUI (style with jquery mobile)
+		-figure out styling (color, any graphics?, like a robotic referee figure?, mainly think about the font use the google web fonts as we did in startup class)
+			-really simple logo (need to do 15-20 min brainstorm)
+				-sun, ball, whistle
+				-ref shirt?
+				-robot whistle
+				-sunglasses whistle
+				-skim images of ref's (what do you automatically id w/ ref's or coaches)
+			-but the look and feel comes mainly from font and colors
+
+	Issue:
+	The current logic works ok but it always favors creating a 4's court and I think most people would rather play on 3's teams if possible
+	Would be better if the logic gave all possible combinations for the given number of people, rather than just one fixed configuration
+		-it's possible to do this b/c I have original copies of the NumPlayers and NumDoublesPlayers values (from the user input), and NumGroupPlayers (doesn't change)
+
+	Concept:
+
+	https://en.wikipedia.org/wiki/Permutation
+	?maybe also combinations
+
+-->
+
+
+---
+
+potentially useful reference
+
+http://www.html5canvastutorials.com/kineticjs/html5-canvas-kineticjs-rect-tutorial/
+http://www.html5canvastutorials.com/advanced/html5-canvas-start-and-stop-an-animation/
+
