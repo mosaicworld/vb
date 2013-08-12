@@ -19,7 +19,7 @@
 					    //console.log("window width: " + width);
 					    var win_height = $(window).height();
 					    //console.log("window height: " + height);
-					    var rect_width = 115;
+					    var rect_width = 110;
 					    var rect_height = 150;
 
 //custom object - team (int num, array players, int size)
@@ -43,6 +43,15 @@
 						//Court.prototype.addTeams = function() {
 						  //  return ;
 						//}
+
+						//numSizeCourts should be refactored and enhanced
+						//break into 3-4 subfunctions
+						//1 for group players, recursive functions that breaks the group into 3, then 4 player teams
+						//2 for remaining group players (after goen thru #1), breaks group into 2 player team
+						//3 for original 2 player teams, counts # courts (think about whether courts should be created here rather than below)
+						//consider: maybe there should be one combined button: Get Courts and Teams (first goes through 4's, 3's, 2's)
+						//2nd combined button: Get Courts and Teams (mostly group teams); goes through 3's and 4's and probably only 1 
+						//additional 2's team
 
 						function numSizeCourts () {  
 							var RemainingGroupPlayers; // tracking the current number of players to place on a court
