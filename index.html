@@ -147,7 +147,7 @@
 								context.beginPath();
 
 								//drawing 2 courts per row (for a little more space efficiency)
-								if ((i+1)%2 != 0) { //col 1 of given row
+								if ( (i%2) == 0) { //col 1 of given row
 									context.rect((win_width/3 - rect_width/2), (Math.floor(i/3)* (rect_height + 50) + 5), rect_width, rect_height);
 									context.fillText(listCourts[i].team1.players, (win_width/3), (Math.floor(i/2) * (rect_height + 50) + 55));
       								console.log("court " + (i + 1) + " team1 players: " + listCourts[i].team1.players);
