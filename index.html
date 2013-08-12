@@ -145,28 +145,21 @@
 								context.textAlign = 'center';
 
 								context.beginPath();
-								//drawing 3 courts per row (for a little more space efficiency)
-								if ((i+1)%3 == 1) { //col 1 of given row
-									context.rect((win_width/4 - rect_width/2), (Math.floor(i/3)* (rect_height + 50) + 5), rect_width, rect_height);
-									context.fillText(listCourts[i].team1.players, (win_width/4), (Math.floor(i/3) * (rect_height + 50) + 55));
+
+								//drawing 2 courts per row (for a little more space efficiency)
+								if ((i+1)%2 != 0) { //col 1 of given row
+									context.rect((win_width/3 - rect_width/2), (Math.floor(i/3)* (rect_height + 50) + 5), rect_width, rect_height);
+									context.fillText(listCourts[i].team1.players, (win_width/3), (Math.floor(i/2) * (rect_height + 50) + 55));
       								console.log("court " + (i + 1) + " team1 players: " + listCourts[i].team1.players);
-      								context.fillText('vs', (win_width/4), (Math.floor(i/3) * (rect_height + 50) + 80));
-      								context.fillText(listCourts[i].team2.players, (win_width/4), (Math.floor(i/3) * (rect_height + 50) + 105));
-								} else if ((i+1)%3 == 2) { //col 2 of given row
-									context.rect((win_width/2 - rect_width/2), (Math.floor(i/3)* (rect_height + 50) + 5), rect_width, rect_height);
-									context.fillText(listCourts[i].team1.players, (win_width/2), (Math.floor(i/3) * (rect_height + 50) + 55));
+      								context.fillText('vs', (win_width/3), (Math.floor(i/2) * (rect_height + 50) + 80));
+      								context.fillText(listCourts[i].team2.players, (win_width/3), (Math.floor(i/2) * (rect_height + 50) + 105));
+								} else { //col 2 of given row
+									context.rect((win_width*2/3 - rect_width/2), (Math.floor(i/2)* (rect_height + 50) + 5), rect_width, rect_height);
+									context.fillText(listCourts[i].team1.players, (win_width*2/3), (Math.floor(i/2) * (rect_height + 50) + 55));
       								console.log("court " + (i + 1) + " team1 players: " + listCourts[i].team1.players);
-      								context.fillText('vs', (win_width/2), (Math.floor(i/3) * (rect_height + 50) + 80));
-      								context.fillText(listCourts[i].team2.players, (win_width/2), (Math.floor(i/3) * (rect_height + 50) + 105));
-								} else { //col 3 of given row
-									context.rect((win_width*3/4 - rect_width/2), (Math.floor(i/3)* (rect_height + 50) + 5), rect_width, rect_height);
-									context.fillText(listCourts[i].team1.players, (win_width*3/4), (Math.floor(i/3) * (rect_height + 50) + 55));
-      								console.log("court " + (i + 1) + " team1 players: " + listCourts[i].team1.players);
-      								context.fillText('vs', (win_width*3/4), (Math.floor(i/3) * (rect_height + 50) + 80));
-      								context.fillText(listCourts[i].team2.players, (win_width*3/4), (Math.floor(i/3) * (rect_height + 50) + 105));
+      								context.fillText('vs', (win_width*2/3), (Math.floor(i/2) * (rect_height + 50) + 80));
+      								context.fillText(listCourts[i].team2.players, (win_width*2/3), (Math.floor(i/2) * (rect_height + 50) + 105));
 								}
-								//context.fillStyle = 'orange';
-								//context.fill();
 								context.lineWidth = 1.5;
 								//different colors for court outlines based on the size of the assigned team
 								if (listCourts[i].size == 4) { // court for 4 player teams
