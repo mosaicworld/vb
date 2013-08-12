@@ -2,6 +2,7 @@
 
 						var NumDoublesPlayers; //doesn't change
 						var NumGroupPlayers; // original num of group players; doesn't change
+						var RemainingGroupPlayers; // tracking the current number of players to place on a court
 						var Num2CourtsFixed; // 2s courts from original doubles players
 						var Num2CourtsGroup = 0; // 2s courts from original group players
 						var TotNum2Courts;
@@ -54,7 +55,6 @@
 						//additional 2's team
 
 						function numSizeCourts () {  
-							var RemainingGroupPlayers; // tracking the current number of players to place on a court
 							var ExtraMessage = "";
 
 							NumGroupPlayers = $("#NumGroupPlayers").val(); //doesn't change
@@ -69,7 +69,8 @@
 
 							RemainingGroupPlayers = NumGroupPlayers;
 
-							getGroupCourts(RemainingGroupPlayers);
+//trying to fix court num logic
+							RemainingGroupPlayers = getGroupCourts(RemainingGroupPlayers);
 
 							if (RemainingGroupPlayers >= 4) { //added check to fix case where ending up with negative values for RemainingGroupPlayers and ExtraPlayer
 								Num2CourtsGroup += 1;
@@ -105,23 +106,26 @@
 
 						} //end numSizeCourts()
 
+//trying to fix court num logic
 						function getGroupCourts(remainingPlayers) {
-							if (remainingPlayers <= 4) {
-								return 0;
+							if (remainingPlayers <= 5) {
+								return remainingPlayers;
 							}
 							else {
 								if (remainingPlayers >= 6) { //2 check if remaining players >= 6; 3's court
 									Num3Courts += 1;
-									RemainingGroupPlayers -= 6;
+									remainingPlayers -= 6;
 								}
 								if (remainingPlayers >= 8) { //1 check if remaining players >= 8; 4's court
 									Num4Courts += 1;
-									RemainingGroupPlayers -= 8;
+									remainingPlayers -= 8;
 								}
 								if (remainingPlayers >= 6) {
-									getGroupCourts(RemainingGroupPlayers)
+									getGroupCourts(remainingPlayers)
 								}
 							}
+							console.log("remainingPlayers: " + remainingPlayers);
+							console.log("RemainingGroupPlayers: " + RemainingGroupPlayers);
 						}
 
 						function randomGroupTeams () {
