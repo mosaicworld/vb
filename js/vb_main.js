@@ -69,19 +69,11 @@
 
 							RemainingGroupPlayers = NumGroupPlayers;
 
-							while (RemainingGroupPlayers >= 4) {
-								if (RemainingGroupPlayers >= 8) { //1 check if remaining players >= 8; 4's court
-									Num4Courts += 1;
-									RemainingGroupPlayers -= 8;
-								}
-								if (RemainingGroupPlayers >= 6) { //2 check if remaining players >= 6; 3's court
-									Num3Courts += 1;
-									RemainingGroupPlayers -= 6;
-								}
-								if (RemainingGroupPlayers - 4 >= 0) { //added check to fix case where ending up with negative values for RemainingGroupPlayers and ExtraPlayer
-									Num2CourtsGroup += 1;
-									RemainingGroupPlayers -= 4;						
-								}
+							getGroupCourts(RemainingGroupPlayers);
+
+							if (RemainingGroupPlayers >= 4) { //added check to fix case where ending up with negative values for RemainingGroupPlayers and ExtraPlayer
+								Num2CourtsGroup += 1;
+								RemainingGroupPlayers -= 4;						
 							}
 
 							TotNum2Courts = Num2CourtsFixed + Num2CourtsGroup;
@@ -112,6 +104,25 @@
 							}
 
 						} //end numSizeCourts()
+
+						function getGroupCourts(remainingPlayers) {
+							if (remainingPlayers <= 4) {
+								return 0;
+							}
+							else {
+								if (remainingPlayers >= 6) { //2 check if remaining players >= 6; 3's court
+									Num3Courts += 1;
+									RemainingGroupPlayers -= 6;
+								}
+								if (remainingPlayers >= 8) { //1 check if remaining players >= 8; 4's court
+									Num4Courts += 1;
+									RemainingGroupPlayers -= 8;
+								}
+								if (remainingPlayers >= 6) {
+									getGroupCourts(RemainingGroupPlayers)
+								}
+							}
+						}
 
 						function randomGroupTeams () {
 							//	1 create an array with a list of numbers (1 - NumGroupPlayers)
