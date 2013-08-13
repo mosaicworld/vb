@@ -108,7 +108,7 @@
 
 					<div class="row">
 					  	<div class="col-12 col-lg-12">
-					  		<input name="btnRandomGroup" id="btnRandomGroup" type="button" value="Randomize Teams" class="label" ></input>
+					  		<input name="btnRandomGroup" id="btnRandomGroup" type="button" value="Get random teams" class="label" ></input>
 					  		<!-- hid (including doubles) -->
 					  	</div>
 					</div>
@@ -138,6 +138,7 @@
 
 							for (var i = 0; i < listCourts.length; i++) {
 								var context = canvas.getContext('2d');
+								var space = 10; // gives some space between the 2 rects on a given row
 								context.font = 'normal 1em Arial';
 								context.fillStyle = 'black';
 								context.textAlign = 'center';
@@ -155,21 +156,21 @@
 
 								//drawing 2 courts per row (for a little more space efficiency)
 								if ( (i%2) == 0) { //col 1 of given row
-									context.rect((win_width/3 - rect_width/2), (Math.floor(i/2)* (rect_height + 50) + 5), rect_width, rect_height);
+									context.rect((win_width/3 - rect_width/2 - space), (Math.floor(i/2)* (rect_height + 50) + 5), rect_width, rect_height);
 									context.stroke();
-									context.fillText(listCourts[i].team1.players, (win_width/3), (Math.floor(i/2) * (rect_height + 50) + 50));
+									context.fillText(listCourts[i].team1.players, (win_width/3 - space), (Math.floor(i/2) * (rect_height + 50) + 50));
       								console.log("court " + (i + 1) + " team1 players: " + listCourts[i].team1.players);
       								console.log("rect color: " + context.strokeStyle);
-      								context.fillText('vs', (win_width/3), (Math.floor(i/2) * (rect_height + 50) + 75));
-      								context.fillText(listCourts[i].team2.players, (win_width/3), (Math.floor(i/2) * (rect_height + 50) + 100));
+      								context.fillText('vs', (win_width/3 - space), (Math.floor(i/2) * (rect_height + 50) + 75));
+      								context.fillText(listCourts[i].team2.players, (win_width/3 - space), (Math.floor(i/2) * (rect_height + 50) + 100));
 								} else { //col 2 of given row
-									context.rect((win_width*2/3 - rect_width/2), (Math.floor(i/2)* (rect_height + 50) + 5), rect_width, rect_height);
+									context.rect((win_width*2/3 - rect_width/2 + space), (Math.floor(i/2)* (rect_height + 50) + 5), rect_width, rect_height);
 									context.stroke();
-									context.fillText(listCourts[i].team1.players, (win_width*2/3), (Math.floor(i/2) * (rect_height + 50) + 50));
+									context.fillText(listCourts[i].team1.players, (win_width*2/3 + space), (Math.floor(i/2) * (rect_height + 50) + 50));
       								console.log("court " + (i + 1) + " team1 players: " + listCourts[i].team1.players);
       								console.log("rect color: " + context.strokeStyle);
-      								context.fillText('vs', (win_width*2/3), (Math.floor(i/2) * (rect_height + 50) + 75));
-      								context.fillText(listCourts[i].team2.players, (win_width*2/3), (Math.floor(i/2) * (rect_height + 50) + 100));
+      								context.fillText('vs', (win_width*2/3 + space), (Math.floor(i/2) * (rect_height + 50) + 75));
+      								context.fillText(listCourts[i].team2.players, (win_width*2/3 + space), (Math.floor(i/2) * (rect_height + 50) + 100));
 								}
 							}
 
