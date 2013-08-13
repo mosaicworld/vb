@@ -70,7 +70,10 @@
 							RemainingGroupPlayers = NumGroupPlayers;
 
 //trying to fix court num logic
-							RemainingGroupPlayers = getGroupCourts(RemainingGroupPlayers);
+							getGroupCourts(RemainingGroupPlayers);
+//this always gives an undefined value; possibly b/c on the first iteration of getGroupCourts, I think there is no return
+							//console.log("RemainingGroupPlayers after getGroupCourts: " + LeftoverGroupPlayers);
+							//RemainingGroupPlayers = LeftoverGroupPlayers;
 
 							if (RemainingGroupPlayers >= 4) { //added check to fix case where ending up with negative values for RemainingGroupPlayers and ExtraPlayer
 								Num2CourtsGroup += 1;
@@ -108,20 +111,24 @@
 
 //trying to fix court num logic
 						function getGroupCourts(remainingPlayers) {
-							if (remainingPlayers <= 5) {
+							if (remainingPlayers < 6) {
+//issue where remainingPlayers is undefined	
+//this only gets printed when I update the value of RemainingGroupPlayers (rather than remainingPlayers within the else statement)							
+								console.log("remainingPlayers after recursion: " + remainingPlayers);
 								return remainingPlayers;
 							}
 							else {
 								if (remainingPlayers >= 6) { //2 check if remaining players >= 6; 3's court
 									Num3Courts += 1;
-									remainingPlayers -= 6;
+//not positive whether to update remainingPlayers (param) vs RemainingGroupPlayers									
+									RemainingGroupPlayers -= 6;
 								}
 								if (remainingPlayers >= 8) { //1 check if remaining players >= 8; 4's court
 									Num4Courts += 1;
-									remainingPlayers -= 8;
+									RemainingGroupPlayers -= 8;
 								}
 								if (remainingPlayers >= 6) {
-									getGroupCourts(remainingPlayers)
+									getGroupCourts(RemainingGroupPlayers)
 								}
 							}
 							console.log("remainingPlayers: " + remainingPlayers);
