@@ -120,11 +120,13 @@
 							else {
 								if (remainingPlayers >= 6) { //2 check if remaining players >= 6; 3's court
 									Num3Courts += 1;
-//not positive whether to update remainingPlayers (param) vs RemainingGroupPlayers									
+//not positive whether to update remainingPlayers (param) vs RemainingGroupPlayers		
+									remainingPlayers -= 6;							
 									RemainingGroupPlayers -= 6;
 								}
 								if (remainingPlayers >= 8) { //1 check if remaining players >= 8; 4's court
 									Num4Courts += 1;
+									remainingPlayers -=8;
 									RemainingGroupPlayers -= 8;
 								}
 								if (remainingPlayers >= 6) {
