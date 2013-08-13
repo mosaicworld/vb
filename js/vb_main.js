@@ -20,8 +20,8 @@
 					    //console.log("window width: " + width);
 					    var win_height = $(window).height();
 					    //console.log("window height: " + height);
-					    var rect_width = 110;
-					    var rect_height = 150;
+					    var rect_width = 105;
+					    var rect_height = 135;
 
 //custom object - team (int num, array players, int size)
 						function Team(num, players) { 

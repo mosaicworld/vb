@@ -155,19 +155,19 @@
 								if ( (i%2) == 0) { //col 1 of given row
 									context.rect((win_width/3 - rect_width/2), (Math.floor(i/2)* (rect_height + 50) + 5), rect_width, rect_height);
 									context.stroke();
-									context.fillText(listCourts[i].team1.players, (win_width/3), (Math.floor(i/2) * (rect_height + 50) + 55));
+									context.fillText(listCourts[i].team1.players, (win_width/3), (Math.floor(i/2) * (rect_height + 50) + 50));
       								console.log("court " + (i + 1) + " team1 players: " + listCourts[i].team1.players);
       								console.log("rect color: " + context.strokeStyle);
-      								context.fillText('vs', (win_width/3), (Math.floor(i/2) * (rect_height + 50) + 80));
-      								context.fillText(listCourts[i].team2.players, (win_width/3), (Math.floor(i/2) * (rect_height + 50) + 105));
+      								context.fillText('vs', (win_width/3), (Math.floor(i/2) * (rect_height + 50) + 75));
+      								context.fillText(listCourts[i].team2.players, (win_width/3), (Math.floor(i/2) * (rect_height + 50) + 100));
 								} else { //col 2 of given row
 									context.rect((win_width*2/3 - rect_width/2), (Math.floor(i/2)* (rect_height + 50) + 5), rect_width, rect_height);
 									context.stroke();
-									context.fillText(listCourts[i].team1.players, (win_width*2/3), (Math.floor(i/2) * (rect_height + 50) + 55));
+									context.fillText(listCourts[i].team1.players, (win_width*2/3), (Math.floor(i/2) * (rect_height + 50) + 50));
       								console.log("court " + (i + 1) + " team1 players: " + listCourts[i].team1.players);
       								console.log("rect color: " + context.strokeStyle);
-      								context.fillText('vs', (win_width*2/3), (Math.floor(i/2) * (rect_height + 50) + 80));
-      								context.fillText(listCourts[i].team2.players, (win_width*2/3), (Math.floor(i/2) * (rect_height + 50) + 105));
+      								context.fillText('vs', (win_width*2/3), (Math.floor(i/2) * (rect_height + 50) + 75));
+      								context.fillText(listCourts[i].team2.players, (win_width*2/3), (Math.floor(i/2) * (rect_height + 50) + 100));
 								}
 							}
 
