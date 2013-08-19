@@ -150,8 +150,8 @@
 								console.log("length arrDoublesPlayers: " + arrDoublesPlayers.length);
 								console.log("first arrayDoublesPlayers: " + arrDoublesPlayers[0]);
 								console.log("last arrayDoublesPlayers: " + arrDoublesPlayers[arrDoublesPlayers.length - 1]);
-
-								arrRandom2sPlayers = randomizeArray(arrDoublesPlayers); //only randomize list if there are known doubles players
+//replace proprietary randomize with underscore.js's shuffle
+								arrRandom2sPlayers = _.shuffle(arrDoublesPlayers); //only randomize list if there are known doubles players
 								console.log("randomized 2s players: " + arrRandom2sPlayers);					
 							}
 
@@ -163,7 +163,8 @@
 							console.log("last arrayGroupPlayers: " + arrGroupPlayers[arrGroupPlayers.length - 1]);
 
 							//1b put the arrGroupPlayers in a random order
-							arrRandomPlayers = randomizeArray(arrGroupPlayers);	
+//replace proprietary randomize with underscore.js's shuffle
+							arrRandomPlayers = _.shuffle(arrGroupPlayers);	
 							console.log("randomized group players: " + arrRandomPlayers);
 
 							//assignPlayersTeams(); //issue is not sure how to get the count of 2s, 3s, 4s courts from other function
@@ -202,6 +203,7 @@
 
 						} //end randomGroupTeams()
 
+/* replaced with underscore.js shuffle function
 						function randomizeArray (array1) { //not crazy about logic, would like to improve it where 1/3 of time, insert a number around the middle of the array
 							var tempArray = [];
 							for (var i = 0; i < array1.length; i++) { 
@@ -221,6 +223,7 @@
 						function getRandomArbitrary(min, max) {
 			 				return Math.random() * (max - min) + min;
 						}
+*/
 
 						function assignTeams () { //instantiate the team objects
 							//take arr4Teams and split the list of random 4s players into separate teams
