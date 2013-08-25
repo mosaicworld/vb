@@ -109,29 +109,54 @@
 
 						} //end numSizeCourts()
 
-//trying to fix court num logic
 						function getGroupCourts(remainingPlayers) {
-							if (remainingPlayers < 6) {
-//issue where remainingPlayers is undefined	
-//this only gets printed when I update the value of RemainingGroupPlayers (rather than remainingPlayers within the else statement)							
+							if (remainingPlayers < 4) {
 								console.log("remainingPlayers after recursion: " + remainingPlayers);
 								return remainingPlayers;
-							}
-							else {
-								if (remainingPlayers >= 6) { //2 check if remaining players >= 6; 3's court
-									Num3Courts += 1;
-//not positive whether to update remainingPlayers (param) vs RemainingGroupPlayers		
-									remainingPlayers -= 6;							
-									RemainingGroupPlayers -= 6;
+							} else {
+								
+								if (remainingPlayers % 6 <= 1) {
+									Num3Courts += (Math.floor(remainingPlayers/6));
+									console.log(Math.floor(remainingPlayers/6));
+									remainingPlayers -= 6 * (Math.floor(remainingPlayers/6));							
+									RemainingGroupPlayers -= 6 * (Math.floor(RemainingGroupPlayers/6));
+								} 
+								if (remainingPlayers % 8 <= 1) {
+									Num4Courts += (Math.floor(remainingPlayers/8));
+									remainingPlayers -=8 * (Math.floor(remainingPlayers/8));
+									RemainingGroupPlayers -= 8 * (Math.floor(RemainingGroupPlayers/8));
+								} 
+								if (remainingPlayers % 10 <= 1) {
+									Num3Courts +=  (Math.floor(remainingPlayers/10));
+									Num2CourtsGroup +=  (Math.floor(remainingPlayers/10));
+									remainingPlayers -= 10 * (Math.floor(remainingPlayers/10));							
+									RemainingGroupPlayers -= 10 * (Math.floor(RemainingGroupPlayers/10));
 								}
-								if (remainingPlayers >= 8) { //1 check if remaining players >= 8; 4's court
-									Num4Courts += 1;
-									remainingPlayers -=8;
-									RemainingGroupPlayers -= 8;
+								if (remainingPlayers % 14 <= 1) {
+									Num4Courts += (Math.floor(remainingPlayers/14));
+									Num3Courts += (Math.floor(remainingPlayers/14));
+									remainingPlayers -= 14 * (Math.floor(remainingPlayers/14));							
+									RemainingGroupPlayers -= 14 * (Math.floor(RemainingGroupPlayers/14));
 								}
-								if (remainingPlayers >= 6) {
-									getGroupCourts(RemainingGroupPlayers)
+								if (remainingPlayers % 18 <= 1) {
+									Num4Courts += (Math.floor(remainingPlayers/18));
+									Num3Courts += (Math.floor(remainingPlayers/18));
+									Num2CourtsGroup += (Math.floor(remainingPlayers/18));
+									remainingPlayers -= 18 * (Math.floor(remainingPlayers/18));							
+									RemainingGroupPlayers -= 18 * (Math.floor(RemainingGroupPlayers/18));			
 								}
+								if (remainingPlayers % 22 <= 1) {
+									Num4Courts +=  2 * (Math.floor(remainingPlayers/22));
+									Num3Courts +=  (Math.floor(remainingPlayers/22));
+									remainingPlayers -= 22 * (Math.floor(remainingPlayers/22));							
+									RemainingGroupPlayers -= 22 * (Math.floor(RemainingGroupPlayers/22));
+								} 
+								if (remainingPlayers % 4 <= 1) {
+									Num2CourtsGroup += (Math.floor(remainingPlayers/4));
+									remainingPlayers -= 4 * (Math.floor(remainingPlayers/4));							
+									RemainingGroupPlayers -= 4 * (Math.floor(RemainingGroupPlayers/4));
+								}
+ 		
 							}
 							console.log("remainingPlayers: " + remainingPlayers);
 							console.log("RemainingGroupPlayers: " + RemainingGroupPlayers);
