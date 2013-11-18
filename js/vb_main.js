@@ -88,19 +88,21 @@ function numSizeCourts () {
 	}
 
 	//print num courts and team sizes
-	$('#court_results').append('<li><h4>Court Results:</h4></li>');
+	if (NumDoublesPlayers > 0 || NumGroupPlayers > 0) {
+		$('#court_results').append('<li><h4>Court Results:</h4></li>');
+	}
 
-	if (Num4Courts > 0) {
-		$('#court_results').append('<li><p>'+Num4Courts+' court(s) for 4\'s </p></li>');
-		console.log(Num4Courts + " courts for 4's");
+	if (Num2CourtsFixed + Num2CourtsGroup > 0) {
+		$('#court_results').append('<li><p>'+TotNum2Courts+' court(s) for 2\'s </p></li>');
+		console.log(TotNum2Courts + " courts for 2's");
 	}
 	if (Num3Courts > 0) {
 		$('#court_results').append('<li><p>'+Num3Courts+' court(s) for 3\'s </p></li>');
 		console.log(Num3Courts + " courts for 3's");
 	}
-	if (Num2CourtsFixed + Num2CourtsGroup > 0) {
-		$('#court_results').append('<li><p>'+TotNum2Courts+' court(s) for 2\'s </p></li>');
-		console.log(TotNum2Courts + " courts for 2's");
+	if (Num4Courts > 0) {
+		$('#court_results').append('<li><p>'+Num4Courts+' court(s) for 4\'s </p></li>');
+		console.log(Num4Courts + " courts for 4's");
 	}
 	if (ExtraPlayer > 0) {
 		$('#court_results').append('<li><p>'+ExtraMessage+'</p></li>');
