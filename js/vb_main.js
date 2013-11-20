@@ -56,6 +56,10 @@ function Court(num, team1, team2) {
 
 function numSizeCourts () {  
 	var ExtraMessage = "";
+	var msg_sing = " court for ";
+	var msg_plur = " courts for ";
+	var extra_msg_sing = " extra player to manually assign to teams.";
+	var extra_msg_plur = " extra players to manually assign to teams.";	
 
 	NumGroupPlayers = $("#NumGroupPlayers").val(); //doesn't change
 	NumDoublesPlayers = $("#NumDoublesPlayers").val(); //doesn't change
@@ -84,7 +88,11 @@ function numSizeCourts () {
 
 	if (RemainingGroupPlayers < 4) { //	4 otherwise remaining players < 4
 		ExtraPlayer = ExtraPlayer + RemainingGroupPlayers;
-		ExtraMessage = "There will be " + ExtraPlayer + " extra player(s) to manually assign to teams.";
+		if (ExtraPlayer > 1) {
+			ExtraMessage = "There will be " + ExtraPlayer + extra_msg_plur;
+		} else {
+			ExtraMessage = "There will be " + ExtraPlayer + extra_msg_sing;
+		}
 	}
 
 	//print num courts and team sizes
@@ -93,15 +101,27 @@ function numSizeCourts () {
 	}
 
 	if (Num2CourtsFixed + Num2CourtsGroup > 0) {
-		$('#court_results').append('<li id="crt_results2"><p>'+TotNum2Courts+' court(s) for 2\'s </p></li>');
+		if (Num2CourtsFixed + Num2CourtsGroup > 1) {
+			$('#court_results').append('<li id="crt_results2"><p>'+ TotNum2Courts + msg_plur + '2\'s </p></li>');
+		} else {
+			$('#court_results').append('<li id="crt_results2"><p>'+ TotNum2Courts + msg_sing + '2\'s </p></li>');
+		}
 		console.log(TotNum2Courts + " courts for 2's");
 	}
 	if (Num3Courts > 0) {
-		$('#court_results').append('<li id="crt_results3"><p>'+Num3Courts+' court(s) for 3\'s </p></li>');
+		if (Num3Courts > 1) {
+			$('#court_results').append('<li id="crt_results3"><p>'+ Num3Courts + msg_plur + '3\'s </p></li>');
+		} else {
+			$('#court_results').append('<li id="crt_results3"><p>'+ Num3Courts + msg_sing + '3\'s </p></li>');
+		}	
 		console.log(Num3Courts + " courts for 3's");
 	}
 	if (Num4Courts > 0) {
-		$('#court_results').append('<li id="crt_results4"><p>'+Num4Courts+' court(s) for 4\'s </p></li>');
+		if (Num4Courts > 1) {
+			$('#court_results').append('<li id="crt_results4"><p>'+ Num4Courts + msg_plur + '4\'s </p></li>');
+		} else {
+			$('#court_results').append('<li id="crt_results4"><p>'+ Num4Courts + msg_sing + '4\'s </p></li>');
+		}
 		console.log(Num4Courts + " courts for 4's");
 	}
 	if (ExtraPlayer > 0) {
