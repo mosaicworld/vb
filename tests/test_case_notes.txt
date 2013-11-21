@@ -1,0 +1,63 @@
+TestVBTeamCourts_notes.txt
+
+last updated 111913
+===
+
+Current test cases are at:
+https://docs.google.com/spreadsheet/ccc?key=0AqyhFNCZsmcddHAtTHNRMFJMa1g5TmQ4MlBETDlVenc&usp=sharing
+
+---
+
+POSITIVE TESTS
+
+-probably set up 2 global vars; lists with the number that user can select from each select list (doubles, group)
+
+-How to test the text results from Number of Courts button
+	str_expected = "1 court for 2\'s"
+	str_expected = "2 courts for 2\'s"
+	element = self.driver.find_element_by_id("crt_results2")   #alt crt_results3; crt_results4
+	assertTrue(str_expected in element.text)
+
+-How to test the text results from extra players
+	str_expected = "There will be 1 extra player to manually assign to teams"
+	element = self.driver.find_element_by_id("crt_results2")   #alt crt_results3; crt_results4
+	assertTrue(str_expected in element.text)
+
+	#with current implementation, there is not a case where there is more than one extra player at any given time
+
+NEGATIVE TESTS
+
+-Verify that no results display for 0/0
+
+-Verify that ... test fails for unexpected elements
+	i.e. if you only expect court results for 2's, test should fail when checking for elements (3's or 4's)
+
+	#I'm not really crazy about this check b/c if feels a bit more generic (I don't get specific logged info about what the exception was)
+
+TEST SUITE
+
+-Think one file could contain all the positive tests (or is it better to have about 20 tests in one file?)
+
+-Think one file could contain all the negative tests
+	this should not hold up remaining tests b/c of the expected failure annotations
+
+-Think I need to log results into separate log files
+
+QUESTIONS
+
+-How to test the visual results (drawings) from Random teams button
+	?maybe count the number of rectangles drawn?
+
+-How to test the visual results (random teams) from Random teams button
+	?maybe test the range of players (each player must fall within the expected range; there should be no repeat players?)
+	?1 check range
+	?2 check that each player only occurs once?
+
+-How to test the Reset button
+	*would like to avoid having to test it for all combinations of select lists (don't think this would be very practical or efficient)
+	-test for about 4 cases (4 doubles, 0 group, click court results button, click reset)
+	-verify that no text displays in the court result area (no court results, no extra players)
+
+-Would like to create some way of running test suite
+	kick off and have all tests run (can be serial)
+	but should eventually figure out how to run test in parallel (for faster results)
