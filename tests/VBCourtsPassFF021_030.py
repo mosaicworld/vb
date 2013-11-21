@@ -15,8 +15,8 @@ class VBCourtsPassFF021_030(unittest.TestCase):
          '21', '22', '23', '24', '25']
         self.str_extra = "There will be 1 extra player to manually assign to teams."
         self.driver = webdriver.Firefox()
-        #file = "http://www.carolchung.com/vb"
-        file = "file://localhost/programming/mywebapp/vb/index.html"
+        file = "http://www.carolchung.com/vb"
+        #file = "file://localhost/programming/mywebapp/vb/index.html"
         self.driver.get(file)
 
     #def is_text_present(self, string):
