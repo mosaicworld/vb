@@ -83,8 +83,7 @@ class NumCourts003(VBCourtsPassOp002_010):
             print 'NumCourts003 passed'
         except AssertionError as e:
             print 'Expected court results not found: ', e
-        #finally:
-            #print 'is this necessary?'
+
 
 class NumCourts004(VBCourtsPassOp002_010):    
 
@@ -111,8 +110,7 @@ class NumCourts004(VBCourtsPassOp002_010):
             print 'NumCourts004 passed'
         except AssertionError as e:
             print 'Expected court results not found: ', e
-        #finally:
-            #print 'is this necessary?'
+
         try:
             element3 = self.driver.find_element_by_id("crt_results5")
             self.assertTrue(self.str_extra in element3.text)
@@ -145,8 +143,6 @@ class NumCourts005(VBCourtsPassOp002_010):
             print 'NumCourts005 passed'
         except AssertionError as e:
             print 'Expected court results not found: ', e
-        #finally:
-            #print 'is this necessary?'
 
 class NumCourts006(VBCourtsPassOp002_010):    
 
@@ -173,8 +169,7 @@ class NumCourts006(VBCourtsPassOp002_010):
             print 'NumCourts006 passed'
         except AssertionError as e:
             print 'Expected court results not found: ', e
-        #finally:
-            #print 'is this necessary?'
+
         try:
             element3 = self.driver.find_element_by_id("crt_results5")
             self.assertTrue(self.str_extra in element3.text)
@@ -207,8 +202,7 @@ class NumCourts007(VBCourtsPassOp002_010):
             print 'NumCourts007 2\'s court results passed'
         except AssertionError as e:
             print 'Expected court results not found: ', e
-        #finally:
-            #print 'is this necessary?'
+
         try:
             element3 = WebDriverWait(self.driver, 13).until(EC.presence_of_element_located((By.ID, "crt_results3")))
             element4 = self.driver.find_element_by_id("crt_results3")
@@ -243,8 +237,7 @@ class NumCourts008(VBCourtsPassOp002_010):
             print 'NumCourts008 2\'s court results passed'
         except AssertionError as e:
             print 'Expected court results not found: ', e
-        #finally:
-            #print 'is this necessary?'
+
         try:
             element3 = WebDriverWait(self.driver, 13).until(EC.presence_of_element_located((By.ID, "crt_results3")))
             element4 = self.driver.find_element_by_id("crt_results3")
@@ -285,8 +278,6 @@ class NumCourts009(VBCourtsPassOp002_010):
             print 'NumCourts009 passed'
         except AssertionError as e:
             print 'Expected court results not found: ', e
-        #finally:
-            #print 'is this necessary?'
 
 class NumCourts010(VBCourtsPassOp002_010):    
 
@@ -313,8 +304,6 @@ class NumCourts010(VBCourtsPassOp002_010):
             print 'NumCourts010 passed'
         except AssertionError as e:
             print 'Expected court results not found: ', e
-        #finally:
-            #print 'is this necessary?'
         try:
             element3 = self.driver.find_element_by_id("crt_results5")
             self.assertTrue(self.str_extra in element3.text)
@@ -324,12 +313,3 @@ class NumCourts010(VBCourtsPassOp002_010):
  
 if __name__ == '__main__':
     unittest.main()         
-
-# 11 17 13 keep getting Assertion errors; either I need to put in a wait time or selenium can't 
-# detect source changes that are a result of jquery?
-# check https://blog.mozilla.org/webqa/2012/07/12/how-to-webdriverwait/
-# > Tracking DOM attributes to see if it may be useful 
-# 11 15 13 hanging due to google analytics
-# should I just test it locally?
-# what if you want to run through multiple select elements?
-# should read up on css selectors
