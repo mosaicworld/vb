@@ -1,8 +1,137 @@
 TestVBTeamCourts_notes.txt
 
-last updated 111913
+last updated 011614
 ===
 
+Test case design revised per reading How to Break Software (James Whittaker)
+
+
+1 Simple test
+  How many doubles players? 4
+  How many group players? 6
+
+2 Boundary single to double digit inputs
+  How many doubles players? 8
+  How many group players? 9
+
+3 Boundary single to double digit inputs
+  How many doubles players? 12
+  How many group players? 9
+
+4 Boundary single to double digit inputs
+  How many doubles players? 8
+  How many group players? 10
+
+5 Boundary single to double digit inputs
+  How many doubles players? 12
+  How many group players? 10
+
+6 Min values 
+  How many doubles players? 0
+  How many group players? 0
+
+7 Max values
+  How many doubles players? 16
+  How many group players? 25
+
+8 Default values (note: this also covers case of odd team with 2 + 3 players)
+  How many doubles players? 0 (default)
+  How many group players? 5 (default)
+
+9 Even teams of two players (min)
+  How many doubles players? 4
+  How many group players? 0
+
+10 Even teams of two players 
+  How many doubles players? 12
+  How many group players? 0
+
+11 Even teams of three players (min)
+  How many doubles players? 0
+  How many group players? 6
+
+12 Even teams of three players 
+   How many doubles players? 0
+   How many group players? 12
+
+13 Even teams of four players (min)
+   How many doubles players? 0
+   How many group players? 8
+
+14 Even teams of four players 
+   How many doubles players? 0
+   How many group players? 16
+
+15 Even teams with two and three players (min)
+   How many doubles players? 0
+   How many group players? 10
+
+16 Even teams with two and three players (min)
+   How many doubles players? 4
+   How many group players? 6
+
+17 Even teams with two and three players 
+   How many doubles players? 4
+   How many group players? 20
+
+18 Even teams with three and four players (min)
+   How many doubles players? 0
+   How many group players? 14
+
+19 Even teams with two, three and four players (min)
+   How many doubles players? 4
+   How many group players? 14
+
+20 Even teams with two, three and four players (min)
+   How many doubles players? 12
+   How many group players? 14
+
+21 Odd teams of two players
+   How many doubles players? 8
+   How many group players? 5
+
+21 Odd teams of three players (min)
+   How many doubles players? 0
+   How many group players? 7
+
+21 Odd teams of three players 
+   How many doubles players? 0
+   How many group players? 13
+
+21 Odd teams of four players (min)
+   How many doubles players? 0
+   How many group players? 9
+
+21 Odd teams of four players 
+   How many doubles players? 0
+   How many group players? 17
+
+21 Odd teams of two and three players (min)
+   How many doubles players? 4
+   How many group players? 7
+
+21 Odd teams of two and three players (min)
+   How many doubles players? 0
+   How many group players? 11
+
+21 Odd teams of two and three players 
+   How many doubles players? 0
+   How many group players? 21
+
+21 Odd teams of three and four players (min)
+   How many doubles players? 0
+   How many group players? 15
+
+21 Odd teams of two, three and four players (min) 
+   How many doubles players? 0
+   How many group players? 19
+
+21 Odd teams of two, three and four players (min) 
+   How many doubles players? 4
+   How many group players? 15
+
+---
+Old test cases 11.2013
 Current test cases are at:
 https://docs.google.com/spreadsheet/ccc?key=0AqyhFNCZsmcddHAtTHNRMFJMa1g5TmQ4MlBETDlVenc&usp=sharing
 
