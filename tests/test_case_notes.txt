@@ -5,6 +5,10 @@ last updated 011614
 
 Test case design revised per reading How to Break Software (James Whittaker)
 
+Note that for the latest test cases (#1 - 31):
+  It's only possible to automate the tests results for clicking the first button,
+  Get Number of Courts.
+  To test the 2nd button, Get Random Teams, it would be necessary to have visual validation and the player to team assignments would be random on each try.
 
 1 Simple test
   How many doubles players? 4
